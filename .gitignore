@@ -1,0 +1,39 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build artifacts
+[Bb]uild/
+x64/
+x86/
+[Oo]bj/
+[Bb]in/
+Debug/
+Release/
+ipch/
+*.ipch
+*.pch
+*.pdb
+*.ilk
+*.obj
+*.exe
+*.log
+
+# Intermediate/others
+*.tlog
+*.lastbuildstate
+*.cache
+*.tmp
+*.VC.db
+*.VC.VC.opendb
+
+# Packages
+packages/
+*.nupkg
+
+# OS
+.DS_Store
+Thumbs.db

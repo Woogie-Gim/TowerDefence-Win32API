@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\00. MainGame">
+      <UniqueIdentifier>{3aa86d17-b243-4e82-b390-db72c46c1ca0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\99. Headers">
+      <UniqueIdentifier>{b6f6c87f-9946-4bff-9b05-98c57d3f04da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\01. Managers">
+      <UniqueIdentifier>{d033306f-47fa-4da2-a7fd-89a9f337d4cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\02. Scene">
+      <UniqueIdentifier>{df4ac333-9362-440a-9059-d32819e4e711}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\02. Scene\Game">
+      <UniqueIdentifier>{078208a8-e6ab-4f4b-976d-09fdcf16cf89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\03. Objects">
+      <UniqueIdentifier>{28280586-841f-4684-a85f-73020314368c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\04. Resources">
+      <UniqueIdentifier>{9b0ebf1b-1e87-49a0-b636-47dad4e86705}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\04. Resources\Game">
+      <UniqueIdentifier>{adce98e5-7cce-45b3-a5f6-7f8d9278d8ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\99. Headers\Default">
+      <UniqueIdentifier>{af37bb7c-508f-474b-bc38-f2bd2005f7bf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>Source Files\99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>Source Files\99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Defines.h">
+      <Filter>Source Files\99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>Source Files\99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TowerDefence.h">
+      <Filter>Source Files\00. MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>Source Files\01. Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Source Files\00. MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Source Files\01. Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Source Files\01. Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Source Files\02. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>Source Files\02. Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Source Files\99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Source Files\01. Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceBase.h">
+      <Filter>Source Files\04. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="LineMesh.h">
+      <Filter>Source Files\04. Resources\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Source Files\99. Headers\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>Source Files\99. Headers\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Source Files\99. Headers\Default</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TowerDefence.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="TowerDefence.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files\99. Headers</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>Source Files\01. Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\00. MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="TowerDefence.cpp">
+      <Filter>Source Files\00. MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\01. Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Source Files\01. Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source Files\02. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Source Files\99. Headers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files\01. Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceBase.cpp">
+      <Filter>Source Files\04. Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="LineMesh.cpp">
+      <Filter>Source Files\04. Resources\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>Source Files\02. Scene\Game</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
