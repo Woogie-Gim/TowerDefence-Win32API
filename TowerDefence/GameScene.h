@@ -1,5 +1,7 @@
 #pragma once
 #include "Scene.h"
+#include "EnemySpawner.h"
+
 class GameScene : public Scene
 {
 public:
@@ -16,5 +18,7 @@ private:
 
 	bool _setOrigin = true;
 	POINT _lastPos = {};
+
+	EnemySpawner _spawner;
 };
 

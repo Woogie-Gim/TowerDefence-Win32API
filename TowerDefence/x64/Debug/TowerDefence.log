@@ -1,2 +1,3 @@
-﻿  SceneManager.cpp
+﻿D:\Visual Studio 2022\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (TowerDefence2.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Missile.cpp
   TowerDefence.vcxproj -> C:\Users\pc\source\repos\TowerDefence\x64\Debug\TowerDefence.exe

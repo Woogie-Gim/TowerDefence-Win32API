@@ -1,7 +1,13 @@
 #include "pch.h"
+#include "GdiPlusSafe.h"
 #include "framework.h"
 #include "TowerDefence.h"
 #include "Game.h"
+#include <gdiplus.h>
+#include <filesystem>
+#pragma comment(lib, "gdiplus.lib")
+
+using namespace Gdiplus;
 
 int mousePosX;
 int mousePosY;
@@ -14,74 +20,94 @@ HWND g_hWnd;
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 
+// GDI+ 전역 토큰
+ULONG_PTR g_gdiplusToken = 0;
+
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
+void GDIPlus_Startup() 
+{
+    GdiplusStartupInput in;
+    GdiplusStartup(&g_gdiplusToken, &in, nullptr);
+}
+
+void GDIPlus_Shutdown() 
+{
+    GdiplusShutdown(g_gdiplusToken);
+}
+
+std::wstring GetExeDir() 
+{
+    wchar_t buf[MAX_PATH]{};
+    GetModuleFileNameW(nullptr, buf, MAX_PATH);
+    return std::filesystem::path(buf).parent_path().wstring();
+}
+
+std::wstring MakeAssetPath(const std::wstring& rel)
+{
+    return (std::filesystem::path(GetExeDir()) / rel).wstring();
+}
+
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-                     _In_opt_ HINSTANCE hPrevInstance,
-                     _In_ LPWSTR    lpCmdLine,
-                     _In_ int       nCmdShow)
+    _In_opt_ HINSTANCE hPrevInstance,
+    _In_ LPWSTR    lpCmdLine,
+    _In_ int       nCmdShow)
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-    // TODO: Place code here.
-
-    // Initialize global strings
+    // 문자열 리소스 로드
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_TOWERDEFENCE, szWindowClass, MAX_LOADSTRING);
 
-    // 1) 윈도우 창 정보 등록
+    // GDI+ 시작
+    GdiplusStartupInput gdiplusStartupInput;
+    GdiplusStartup(&g_gdiplusToken, &gdiplusStartupInput, nullptr);
+
+    // 1) 윈도우 클래스 등록
     MyRegisterClass(hInstance);
 
-    // 2) 윈도우 창 생성
-    // Perform application initialization:
-    if (!InitInstance (hInstance, nCmdShow))
-    {
+    // 2) 윈도우 생성
+    if (!InitInstance(hInstance, nCmdShow)) {
+        GDIPlus_Shutdown();
         return FALSE;
     }
 
+    // 게임 객체 초기화
     Game game;
     game.Init(g_hWnd);
 
     MSG msg = {};
-    uint64 prevTick = 0; // 이전 프레임 갱신 시점 저장용
+    uint64 prevTick = 0;
 
-    // 메인 루프 시작
-    // 메시지 처리와 게임 로직을 동시에 다루는 구조
+    // 메인 루프
     while (msg.message != WM_QUIT)
     {
-        // 윈도우 메시지가 있을 경우 처리
         if (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
         {
-            ::TranslateMessage(&msg);   // 키 입력 등 메시지 번역
-            ::DispatchMessage(&msg);    // WndProc으로 메시지 전달
+            ::TranslateMessage(&msg);
+            ::DispatchMessage(&msg);
         }
         else
         {
-            // 시스템 메시지가 없을 때 게임 루프 실행
-            uint64 now = ::GetTickCount64(); // 현재 시각 (밀리초 단위)
-
-            // 이전 프레임으로부터 10ms 이상 지났다면 프레임 갱신
-            if (now - prevTick >= 10)
+            uint64 now = ::GetTickCount64();
+            if (now - prevTick >= 10) // ~100 FPS 상한
             {
-                // 게임 로직 업데이트 (입력, 움직임, 충돌 등)
                 game.Update();
-                // 화면 렌더링
-                game.Render();
-                // 이번 프레임 시간 기록
+                game.Render(); // 더블버퍼의 back HDC로 그린 뒤 Present하는 구조라고 가정
                 prevTick = now;
             }
         }
     }
 
-    return (int)msg.wParam; // 프로그램 종료 코드 반환
+    // GDI+ 종료
+    GDIPlus_Shutdown();
+    return (int)msg.wParam;
 }
-
-
 
 //
 //  FUNCTION: MyRegisterClass()
@@ -133,7 +159,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     // 메인 윈도우 생성
     HWND hWnd = CreateWindowW(
         L"TowerDefence",             // 윈도우 클래스 이름
-        L"Cat Tower",                // 창 타이틀
+        L"Animal Tower Defence",     // 창 타이틀
         WS_OVERLAPPEDWINDOW,         // 창 스타일 (타이틀바 + 닫기 버튼 등 포함)
         CW_USEDEFAULT,               // X 좌표 (자동 결정)
         0,                           // Y 좌표 (자동 결정)

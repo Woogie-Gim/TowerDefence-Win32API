@@ -34,11 +34,11 @@
     <Filter Include="Source Files\04. Resources">
       <UniqueIdentifier>{9b0ebf1b-1e87-49a0-b636-47dad4e86705}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\04. Resources\Game">
-      <UniqueIdentifier>{adce98e5-7cce-45b3-a5f6-7f8d9278d8ec}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\99. Headers\Default">
       <UniqueIdentifier>{af37bb7c-508f-474b-bc38-f2bd2005f7bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\03. Objects\Game">
+      <UniqueIdentifier>{3ce7db7e-7fc6-4414-8319-b5530e37850f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -78,14 +78,8 @@
     <ClInclude Include="Utils.h">
       <Filter>Source Files\99. Headers</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Source Files\01. Managers</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceBase.h">
       <Filter>Source Files\04. Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="LineMesh.h">
-      <Filter>Source Files\04. Resources\Game</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Source Files\99. Headers\Default</Filter>
@@ -95,6 +89,27 @@
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Source Files\99. Headers\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Source Files\03. Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Source Files\03. Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Source Files\03. Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Missile.h">
+      <Filter>Source Files\03. Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Source Files\01. Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpawner.h">
+      <Filter>Source Files\03. Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GdiPlusSafe.h">
+      <Filter>Source Files\99. Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -135,17 +150,29 @@
     <ClCompile Include="Utils.cpp">
       <Filter>Source Files\99. Headers</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Source Files\01. Managers</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceBase.cpp">
       <Filter>Source Files\04. Resources</Filter>
     </ClCompile>
-    <ClCompile Include="LineMesh.cpp">
-      <Filter>Source Files\04. Resources\Game</Filter>
-    </ClCompile>
     <ClCompile Include="GameScene.cpp">
       <Filter>Source Files\02. Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files\03. Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\03. Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Source Files\03. Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Missile.cpp">
+      <Filter>Source Files\03. Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Source Files\01. Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySpawner.cpp">
+      <Filter>Source Files\03. Objects\Game</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

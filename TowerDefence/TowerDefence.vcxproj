@@ -24,6 +24,7 @@
     <ProjectGuid>{1cae7738-27fc-4017-824f-0a5bdd4ea67b}</ProjectGuid>
     <RootNamespace>TowerDefence</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>TowerDefence</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -131,16 +132,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Defines.h" />
+    <ClInclude Include="EnemySpawner.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GdiPlusSafe.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="LineMesh.h" />
+    <ClInclude Include="Missile.h" />
+    <ClInclude Include="Monster.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceBase.h" />
-    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="targetver.h" />
@@ -150,15 +156,19 @@
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="LineMesh.cpp" />
+    <ClCompile Include="Missile.cpp" />
+    <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="ResourceBase.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TimeManager.cpp" />
