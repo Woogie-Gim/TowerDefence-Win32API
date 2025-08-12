@@ -3,6 +3,7 @@
 #include "GdiPlusSafe.h"
 #include "TimeManager.h"
 #include "ObjectManager.h"
+#include "Monster.h"
 #include "Utils.h"
 
 using namespace Gdiplus;
@@ -84,8 +85,10 @@ void Missile::Update()
     // 충돌 발생 시 자신과 상대 삭제
     if (hitObject)
     {
-        GET_SINGLE(ObjectManager)->Remove(hitObject);
-        GET_SINGLE(ObjectManager)->Remove(this);
+        if (hitObject->GetObjectType() == GameObjectType::Monster)
+            static_cast<Monster*>(hitObject)->OnHit(); // Hurt -> FadeOut
+
+        GET_SINGLE(ObjectManager)->Remove(this); // 미사일만 제거
         return;
     }
 
