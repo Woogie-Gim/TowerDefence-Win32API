@@ -17,6 +17,9 @@ public:
 	// 미사일이 맞았을 때 호출
 	void OnHit();
 
+    // 스포너가 픽셀 좌표의 웨이포인트를 세팅해줌
+    void SetPathPixels(const std::vector<POINT>& pts);
+
 private:
 	void LoadSprites();
 
@@ -44,7 +47,9 @@ private:
     int _renderW = 35;
     int _renderH = 48;
 
-	Vector _lookPos = {};
-	Vector _lookDir = {};
+    // 웨이 포인트 경로
+    std::vector<POINT> _waypoints;  // 픽셀 좌표
+    size_t _wpIndex = 0;            // 현재 목표 웨이포인트 인덱스
+    float  _reachRadius = 6.f;      // 이 거리 이내면 다음 점으로
 };
 

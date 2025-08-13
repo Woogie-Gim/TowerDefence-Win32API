@@ -1,6 +1,2 @@
-﻿  EnemySpawner.cpp
-  GameScene.cpp
-  Missile.cpp
-  Monster.cpp
-  Generating Code...
+﻿  BgmPlayer.cpp
   TowerDefence.vcxproj -> C:\Users\pc\source\repos\TowerDefence\x64\Debug\TowerDefence.exe

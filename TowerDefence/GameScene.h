@@ -1,6 +1,8 @@
 #pragma once
 #include "Scene.h"
 #include "EnemySpawner.h"
+#include "Map.h"
+#include "BgmPlayer.h"
 
 class GameScene : public Scene
 {
@@ -20,5 +22,8 @@ private:
 	POINT _lastPos = {};
 
 	EnemySpawner _spawner;
+	Map _map;
+
+	BgmPlayer  _bgm;
 };
 

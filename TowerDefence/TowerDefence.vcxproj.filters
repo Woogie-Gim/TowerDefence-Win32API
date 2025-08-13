@@ -40,6 +40,9 @@
     <Filter Include="Source Files\03. Objects\Game">
       <UniqueIdentifier>{3ce7db7e-7fc6-4414-8319-b5530e37850f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\05. BGM">
+      <UniqueIdentifier>{28958456-861f-4dbe-809d-1ea3fb422127}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -111,6 +114,12 @@
     <ClInclude Include="GdiPlusSafe.h">
       <Filter>Source Files\99. Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Source Files\03. Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="BgmPlayer.h">
+      <Filter>Source Files\05. BGM</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TowerDefence.rc">
@@ -173,6 +182,12 @@
     </ClCompile>
     <ClCompile Include="EnemySpawner.cpp">
       <Filter>Source Files\03. Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files\03. Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="BgmPlayer.cpp">
+      <Filter>Source Files\05. BGM</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

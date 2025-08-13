@@ -1,15 +1,19 @@
 #pragma once
 
+class Map;
+class Monster;
+
 class EnemySpawner
 {
 public:
     void SetInterval(float sec) { _interval = sec; }
-    void SetSpawnX(float x) { _spawnX = x; }
-    void SetSpawnY(float yMin, float yMax) { _spawnYMin = yMin; _spawnYMax = yMax; }
+
+    // 맵을 넘겨주면 스포너가 맵의 Path를 사용함
+    void SetMap(Map* m) { _map = m; }
 
     void Update(float dt);
 
-    // 선택: 첫 프레임에 바로 1마리 뽑고 싶으면
+    // 첫 프레임에 바로 1마리 뽑고 싶으면 사용
     void Kickstart() { _acc = _interval; }
 
 private:
@@ -18,7 +22,6 @@ private:
 private:
     float _acc = 0.f;
     float _interval = 0.8f;
-    float _spawnX = -50.f;
-    float _spawnYMin = 150.f;
-    float _spawnYMax = 450.f;
+
+    Map* _map = nullptr; // 경로를 알아내기 위한 맵 참조
 };

@@ -44,8 +44,43 @@ void Monster::Update()
     switch (_state)
     {
     case State::Walk:
-        // 이동
-        _pos.x += _stat.speed * dt;
+    {
+        // 경로가 없다면 기존 직진 로직 대신 안전하게 대기/삭제
+        if (_waypoints.empty())
+        {
+            // 경로 없으면 그냥 제거 (혹은 대기)
+            GET_SINGLE(ObjectManager)->Remove(this);
+            return;
+        }
+
+        // 현재 목표 웨이포인트
+        if (_wpIndex >= _waypoints.size())
+        {
+            // 모든 웨이포인트를 소화하면 골인 → 제거(또는 점수 처리)
+            GET_SINGLE(ObjectManager)->Remove(this);
+            return;
+        }
+
+        POINT target = _waypoints[_wpIndex];
+
+        // 현재 위치에서 목표까지 이동
+        float dx = target.x - _pos.x;
+        float dy = target.y - _pos.y;
+        float d2 = dx * dx + dy * dy;
+
+        // 목표점에 거의 도달했으면 다음 점으로
+        if (d2 <= _reachRadius * _reachRadius)
+        {
+            _wpIndex++;
+        }
+        else
+        {
+            float len = std::sqrt(d2);
+            float nx = dx / len;
+            float ny = dy / len;
+            _pos.x += nx * _stat.speed * dt;
+            _pos.y += ny * _stat.speed * dt;
+        }
 
         // 걷기 애니메이션 토글
         _animAcc += dt;
@@ -54,17 +89,10 @@ void Monster::Update()
             _animAcc -= _animInterval;
             _useFirst = !_useFirst;
         }
-
-        // 화면 밖으로 나가면 제거
-        if (_pos.x > 850.f)
-        {
-            GET_SINGLE(ObjectManager)->Remove(this);
-            return;
-        }
         break;
+    }
 
     case State::Hurt:
-        // 일정 시간 Hurt 이미지 고정
         _hurtAcc += dt;
         if (_hurtAcc >= _hurtTime)
         {
@@ -74,7 +102,6 @@ void Monster::Update()
         break;
 
     case State::FadeOut:
-        // 서서히 투명화
         _alpha -= _fadeSpeed * dt;
         if (_alpha <= 0.f)
         {
@@ -159,4 +186,10 @@ void Monster::OnHit()
     _state = State::Hurt;
     _hurtAcc = 0.f;   // Hurt 유지 타이머 리셋
     _alpha = 1.0f;  // 투명도 초기화
+}
+
+void Monster::SetPathPixels(const std::vector<POINT>& pts)
+{
+    _waypoints = pts;
+    _wpIndex = 0;
 }

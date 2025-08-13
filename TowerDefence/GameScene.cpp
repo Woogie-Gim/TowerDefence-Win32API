@@ -5,6 +5,8 @@
 #include "ObjectManager.h"
 #include "TimeManager.h"
 
+extern std::wstring MakeAssetPath(const std::wstring& rel);
+
 GameScene::GameScene()
 {
 
@@ -17,13 +19,18 @@ GameScene::~GameScene()
 
 void GameScene::Init()
 {
-	// 스포너 설정
-	_spawner.SetInterval(0.8f);      // 0.8초마다 스폰
-	_spawner.SetSpawnX(-50.f);       // 화면 왼쪽 밖에서 등장
-	_spawner.SetSpawnY(150.f, 450.f);
+    // 맵 초기화
+    _map.Init();
 
-	Player* player = GET_SINGLE(ObjectManager)->CreateObject<Player>();
-	GET_SINGLE(ObjectManager)->Add(player);
+	// 스포너 설정
+    _spawner.SetMap(&_map);      // 경로 전달
+    _spawner.SetInterval(1.5f);  // 1.5 초 마다 스폰
+
+	//Player* player = GET_SINGLE(ObjectManager)->CreateObject<Player>();
+	//GET_SINGLE(ObjectManager)->Add(player);
+
+    _bgm.SetSource(MakeAssetPath(L"Assets\\BGM\\BGM.mp3")); // mp3 OK
+    _bgm.PlayLoop();                                        // 50% 볼륨, 루프 재생
 }
 
 void GameScene::Update()
@@ -51,6 +58,10 @@ void GameScene::Update()
 
 void GameScene::Render(HDC hdc)
 {
+    // 맵 먼저 그리기
+    _map.Render(hdc);
+
+    // 오브젝트 렌더
 	const vector<Object*>& objects = GET_SINGLE(ObjectManager)->GetObjects();
 
 	for (Object* object : objects)
