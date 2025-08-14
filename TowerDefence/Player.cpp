@@ -27,9 +27,9 @@ Player::~Player()
 
 void Player::Init()
 {
-    _pos = { 400.f, 300.f };
+    _pos = { 200.f, 300.f };
     _stat.speed = 0.f;
-    _fireInterval = 1.0f;
+    _fireInterval = 10.0f;
     _fireAcc = 0.f;
 
     // 스프라이트는 한 번만 로드
@@ -100,10 +100,6 @@ void Player::Render(HDC hdc)
                 (LONG)(_pos.x + halfW), (LONG)(_pos.y + halfH) };
         ::Rectangle(hdc, r.left, r.top, r.right, r.bottom);
     }
-
-    // 포신 라인
-    const Pos fire = GetFirePos();
-    Utils::DrawLine(hdc, _pos, fire);
 }
 
 void Player::LoadSprite()

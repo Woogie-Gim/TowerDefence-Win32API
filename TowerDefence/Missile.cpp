@@ -56,6 +56,31 @@ void Missile::Update()
 
     Vector p1 = GetPos(); // 미사일 위치
 
+    // 타겟 자동획득 조건에 homing 토글 반영
+    if (_homingEnabled && _target == nullptr && nearest != nullptr)
+        _target = nearest;
+
+    // 이동 로직: homing 꺼져 있으면 무조건 직진
+    if (!_homingEnabled || _target == nullptr)
+    {
+        _pos.x += _stat.speed * dt * cosf(_angle);
+        _pos.y -= _stat.speed * dt * sinf(_angle);
+    }
+    else
+    {
+        // 기존 유도 이동
+        Vector tp = _target->GetPos();
+        float dx = tp.x - _pos.x;
+        float dy = tp.y - _pos.y;
+        float len = sqrtf(dx * dx + dy * dy);
+        if (len > 0.0001f) {
+            float nx = dx / len;
+            float ny = dy / len;
+            _pos.x += nx * _stat.speed * dt;
+            _pos.y += ny * _stat.speed * dt;
+        }
+    }
+
     // 모든 오브젝트 검사
     for (Object* obj : objects)
     {
@@ -151,23 +176,41 @@ void Missile::Render(HDC hdc)
 
 }
 
+// 경로 지정 시 기존 스프라이트 삭제 후 즉시 재로딩
+void Missile::SetSpritePath(const std::wstring& path)
+{
+    _spritePath = path;
+
+    if (_sprite) {             // 이미 로드된 게 있으면 정리
+        delete _sprite;
+        _sprite = nullptr;
+    }
+
+    LoadSprite();              // 새 경로로 즉시 로드
+}
+
 void Missile::LoadSprite()
 {
-    if (_sprite) return;
+    if (_sprite) return; // 이미 로드됨
 
-    // 실행 파일(.exe) 폴더 기준 상대 경로
-    const std::wstring full = MakeAssetPath(L"Assets\\Missile\\cow.png");
+    // 지정 경로가 비어 있으면 기본 미사일로
+    const std::wstring rel = _spritePath.empty()
+        ? L"Assets\\Missile\\cow.png"
+        : _spritePath;
 
-    // 파일이 없으면 바로 종료 (렌더에서 네모로 대체됨)
+    const std::wstring full = MakeAssetPath(rel);
+
     if (!std::filesystem::exists(full))
         return;
 
-    // GDI+로 이미지 로드 (알파 자동 처리)
     Gdiplus::Image* img = Gdiplus::Image::FromFile(full.c_str());
-    if (!img) return;
 
-    if (img->GetLastStatus() == Ok)
+    if (img && img->GetLastStatus() == Gdiplus::Ok)
+    {
         _sprite = img;
-    else
+    }
+    else 
+    {
         delete img; // 실패 시 정리
+    }
 }

@@ -3,6 +3,7 @@
 #include "EnemySpawner.h"
 #include "Map.h"
 #include "BgmPlayer.h"
+#include "LifeUI.h"
 
 class GameScene : public Scene
 {
@@ -14,6 +15,11 @@ public:
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
+	void OnLButtonDown(int mx, int my);
+	void RestartGame();
+
+private:
+	void InitWorld();
 
 private:
 	vector<pair<POINT, POINT>> _lines;
@@ -25,5 +31,9 @@ private:
 	Map _map;
 
 	BgmPlayer  _bgm;
+
+	LifeUI       _lifeUI;
+	bool _gameOver = false;
+	float        _restartCountdown = 0.0f;
 };
 

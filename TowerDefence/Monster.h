@@ -1,27 +1,36 @@
 #pragma once
 #include "Object.h"
+#include <vector>
+#include <functional>
+#include <windows.h>
 
 // GDI+ 전방선언
 namespace Gdiplus { class Image; class ImageAttributes; }
 
+struct POINTF
+{
+    float x;
+    float y;
+};
+
 class Monster : public Object
 {
 public:
-	Monster();
-	virtual ~Monster() override;
+    Monster();
+    virtual ~Monster() override;
 
-	virtual void Init() override;
-	virtual void Update() override;
-	virtual void Render(HDC hdc) override;
+    virtual void Init() override;
+    virtual void Update() override;
+    virtual void Render(HDC hdc) override;
 
-	// 미사일이 맞았을 때 호출
-	void OnHit();
-
-    // 스포너가 픽셀 좌표의 웨이포인트를 세팅해줌
-    void SetPathPixels(const std::vector<POINT>& pts);
+    // 외부 제어
+    void OnHit();
+    void SetPos(POINTF p);                            // ★ 헤더에 선언 추가
+    void SetPathPixels(const std::vector<POINT>& pts);// 픽셀 웨이포인트 세팅
+    void SetOnEscaped(std::function<void()> cb) { _onEscaped = std::move(cb); }
 
 private:
-	void LoadSprites();
+    void LoadSprites();
 
     // 상태
     enum class State { Walk, Hurt, FadeOut };
@@ -32,24 +41,26 @@ private:
     Gdiplus::Image* _walk2 = nullptr;
     Gdiplus::Image* _hurt = nullptr;
 
-    float _animAcc = 0.f;          // 프레임 전환 누적시간
-    float _animInterval = 0.15f;   // 걷기 프레임 전환 간격
-    bool  _useFirst = true;        // walk1/walk2 토글
+    float _animAcc = 0.f;
+    float _animInterval = 0.15f;
+    bool  _useFirst = true;
 
-    // Hurt 유지 시간 및 페이드
-    float _hurtTime = 0.18f;       // hurt 고정 표시시간
+    // Hurt/Fade
+    float _hurtTime = 0.18f;
     float _hurtAcc = 0.f;
+    float _alpha = 1.0f;
+    float _fadeSpeed = 2.0f;
 
-    float _alpha = 1.0f;           // 1.0 -> 0.0 으로 페이드
-    float _fadeSpeed = 2.0f;       // 초당 알파 감소량
-
-    // 렌더 사이즈(픽셀)
+    // 렌더 사이즈
     int _renderW = 35;
     int _renderH = 48;
 
-    // 웨이 포인트 경로
-    std::vector<POINT> _waypoints;  // 픽셀 좌표
-    size_t _wpIndex = 0;            // 현재 목표 웨이포인트 인덱스
-    float  _reachRadius = 6.f;      // 이 거리 이내면 다음 점으로
-};
+    // 경로/이동 (하나로 정리)
+    std::vector<POINT> _waypoints;   // 픽셀 웨이포인트
+    size_t _wpIndex = 0;             // 현재 목표 웨이포인트 인덱스
+    float  _reachRadius = 6.f;       // 도착 판정 반경
 
+    // 탈출 콜백/제거 플래그
+    std::function<void()> _onEscaped;
+    bool _pendingDestroy = false;
+};

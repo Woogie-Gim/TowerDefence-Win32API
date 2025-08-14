@@ -40,8 +40,11 @@
     <Filter Include="Source Files\03. Objects\Game">
       <UniqueIdentifier>{3ce7db7e-7fc6-4414-8319-b5530e37850f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\05. BGM">
+    <Filter Include="Source Files\04. Resources\BGM">
       <UniqueIdentifier>{28958456-861f-4dbe-809d-1ea3fb422127}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\04. Resources\UI">
+      <UniqueIdentifier>{c11d35c4-f1ba-40ff-978e-90f48765cdb4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -118,7 +121,13 @@
       <Filter>Source Files\03. Objects\Game</Filter>
     </ClInclude>
     <ClInclude Include="BgmPlayer.h">
-      <Filter>Source Files\05. BGM</Filter>
+      <Filter>Source Files\04. Resources\BGM</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeUI.h">
+      <Filter>Source Files\04. Resources\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Player1.h">
+      <Filter>Source Files\03. Objects\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -187,7 +196,10 @@
       <Filter>Source Files\03. Objects\Game</Filter>
     </ClCompile>
     <ClCompile Include="BgmPlayer.cpp">
-      <Filter>Source Files\05. BGM</Filter>
+      <Filter>Source Files\04. Resources\BGM</Filter>
+    </ClCompile>
+    <ClCompile Include="Player1.cpp">
+      <Filter>Source Files\03. Objects\Game</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

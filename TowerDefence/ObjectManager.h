@@ -19,7 +19,6 @@ public:
     // 프레임 끝에서 한 번에 delete 
     void CollectGarbage();
 
-
     // 현재 등록된 Object 목록 반환
     const vector<Object*>& GetObjects() { return _objects; }
 
@@ -41,9 +40,12 @@ public:
         return object;
     }
 
+    void ClearAll();
+
 private:
     // 게임 내 존재하는 모든 Object 포인터를 보관하는 컨테이너
     vector<Object*> _objects;
     // 지연 삭제 큐
     vector<Object*> _garbage;
+    std::vector<Object*> _pendingRemove;
 };

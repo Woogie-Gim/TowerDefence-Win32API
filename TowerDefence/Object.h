@@ -4,6 +4,8 @@ enum class GameObjectType
 {
 	None,
 	Player,
+	Player1,
+	Player2,
 	Monster,
 	Projectile,
 };

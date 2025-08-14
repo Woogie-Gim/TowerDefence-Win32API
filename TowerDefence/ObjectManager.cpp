@@ -45,6 +45,16 @@ void ObjectManager::CollectGarbage()
     _garbage.clear();
 }
 
+void ObjectManager::ClearAll()
+{
+    // 모두 제거 큐에 넣고 정리
+    for (Object* o : _objects)
+    {
+        _pendingRemove.push_back(0);
+        CollectGarbage();
+    }
+}
+
 void ObjectManager::Clear()
 {
     // 모든 Object를 순회하며 메모리 해제

@@ -140,6 +140,7 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GdiPlusSafe.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LifeUI.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Missile.h" />
     <ClInclude Include="Monster.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Player1.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceBase.h" />
     <ClInclude Include="Scene.h" />
@@ -172,6 +174,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Player1.cpp" />
     <ClCompile Include="ResourceBase.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />

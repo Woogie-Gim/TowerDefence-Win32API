@@ -33,7 +33,11 @@ void EnemySpawner::SpawnOne()
 
     // 몬스터 생성 & 경로 세팅
     Monster* m = GET_SINGLE(ObjectManager)->CreateObject<Monster>();
-    m->SetPos({ (float)p0.x, (float)p0.y });
+    m->SetPos(POINTF{ (float)p0.x, (float)p0.y });
     m->SetPathPixels(pixelPath);
+
+    if (onEnemyEscaped)
+        m->SetOnEscaped(onEnemyEscaped);
+
     GET_SINGLE(ObjectManager)->Add(m);
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 
 class Map;
 class Monster;
@@ -16,6 +17,10 @@ public:
     // 첫 프레임에 바로 1마리 뽑고 싶으면 사용
     void Kickstart() { _acc = _interval; }
 
+    void SetOnEnemyEscaped(std::function<void()> cb) { onEnemyEscaped = std::move(cb); }
+
+    void Reset() { _acc = 0.f; }
+
 private:
     void SpawnOne();
 
@@ -24,4 +29,6 @@ private:
     float _interval = 0.8f;
 
     Map* _map = nullptr; // 경로를 알아내기 위한 맵 참조
+
+    std::function<void()> onEnemyEscaped;
 };
